@@ -12,7 +12,7 @@ public class InteractScript : MonoBehaviour
     [SerializeField] Sprite _spriteAfterInteract;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && _object.GetIsActive() == false)
         {
             _canvas.SetActive(true);
         }
@@ -22,10 +22,11 @@ public class InteractScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKey(KeyCode.E))
             {
                 _object.ActivateObject();
                 _objectSpriteRenderer.sprite = _spriteAfterInteract;
+                _canvas.SetActive(false);
             }
         }
     }
