@@ -6,6 +6,7 @@ public class MEMCHICK : MonoBehaviour
 {
     [SerializeField] GameObject _canvas;
     [SerializeField] GameObject _floor;
+    [SerializeField] bool _eternal;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -21,7 +22,10 @@ public class MEMCHICK : MonoBehaviour
             if (Input.GetKey("w"))
             {
                 _floor.SetActive(false);
-                StartCoroutine(Activate());
+                if (!_eternal)
+                {
+                    StartCoroutine(Activate());
+                }
             }
         }
     }
@@ -34,7 +38,7 @@ public class MEMCHICK : MonoBehaviour
     }
     IEnumerator Activate()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
         _floor.SetActive(true);
     }
 }
