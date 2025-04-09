@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class InteractScript : MonoBehaviour
+public class Checker : MonoBehaviour
 {
 
     [SerializeField] GameObject _canvas;
     [SerializeField] ObjectToInteract _object;
     [SerializeField] SpriteRenderer _objectSpriteRenderer;
     [SerializeField] Sprite _spriteAfterInteract;
-    [SerializeField] PlayerMovement _player;
-    [SerializeField] GameObject _teleportPosition;
-    [SerializeField] bool _teleport;
+    [SerializeField] GameObject _kids;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && !_object.GetIsActive())
@@ -27,23 +25,11 @@ public class InteractScript : MonoBehaviour
         {
             if (Input.GetKey("e"))
             {
-                if (_spriteAfterInteract == null)
-                {
-                    _object.ActivateObject();
-                    _canvas.SetActive(false);
-                }
-                if (!_teleport)
-                {
                     _object.ActivateObject();
                     _objectSpriteRenderer.sprite = _spriteAfterInteract;
                     _canvas.SetActive(false);
+                _kids.SetActive(true);
                 }
-                else
-                {
-                    Debug.Log("3");
-                    _player.transform.position = _teleportPosition.transform.position;
-                }
-            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
